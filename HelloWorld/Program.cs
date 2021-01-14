@@ -32,6 +32,11 @@ namespace HelloWorld
 
                 Console.WriteLine(animal);
             }
+
+            Console.WriteLine("Tell me a secret");
+            var secret = Console.ReadLine();
+            var masked = secret.Substring(secret.Length - 4).PadLeft(secret.Length, '*');
+            Console.WriteLine(masked);
         }
     }
 }
