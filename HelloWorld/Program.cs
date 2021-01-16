@@ -21,7 +21,7 @@ namespace HelloWorld
                 if (Char.IsDigit(c))
                     digits += c;
             }
-            var firstThree = digits.Substring(3, 3);
+            var firstThree = digits.Substring(0, 3);
             var count = firstThree.Count(x => x.ToString() == "5");
             if (digits.ToString().Length == 10 && count != 3)
             {
@@ -41,7 +41,19 @@ namespace HelloWorld
             {
                 return false;
             }
-                
+        }
+        static string LetterLooper(string input)
+        {
+            char[] splitUp = input.ToCharArray();
+            string[] convertedSplitUp = Array.ConvertAll(splitUp, element => element.ToString());
+            string[] uppercased = Array.ConvertAll(convertedSplitUp, element => element.ToUpper());
+
+            for (int i = 0; i < input.Length; i++)
+            {
+               string newValue = uppercased[i].PadRight(i + 1, splitUp[i]);
+               convertedSplitUp[i] = newValue;
+            }
+            return String.Join("-", convertedSplitUp);
         }
         static void Main(string[] args)
         {
@@ -82,10 +94,41 @@ namespace HelloWorld
             //bool result = PinValidation(pin);
             //Console.WriteLine(result);
 
-            Console.WriteLine("Enter a phone number.");
-            var number = Console.ReadLine();
-            var result2 = NumberValidation(number);
-            Console.WriteLine(result2);
+            //Console.WriteLine("Enter a phone number.");
+            //var number = Console.ReadLine();
+            //var result2 = NumberValidation(number);
+            //Console.WriteLine(result2);
+
+            //Console.WriteLine("Enter a serial code.");
+            //var serial = Console.ReadLine();
+            //Console.WriteLine(LetterLooper(serial));
+
+            //Console.WriteLine("Enter numbers.");
+            //var numbers = Console.ReadLine();
+            //string[] splitNumbers = numbers.Split(",");
+            //int[] convertedNumbers = Array.ConvertAll(splitNumbers, number => Int32.Parse(number));
+            //Console.WriteLine("Square or Multiply?");
+            //var response = Console.ReadLine();
+            //int answer;
+            //if (response == "Multiply")
+            //{
+            //    var multiplied = 1;
+            //    foreach (int number in convertedNumbers)
+            //    {
+            //        multiplied *= number;
+            //    }
+            //    answer = multiplied;
+            //    Console.WriteLine(answer);
+            //}
+            //else if (response == "Square")
+            //{
+            //    for (int i = 0; i < convertedNumbers.Length; i++)
+            //    {
+
+            //    }
+            //}
+            
+
         }
     }
 }
