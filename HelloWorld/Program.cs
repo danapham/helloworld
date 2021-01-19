@@ -103,32 +103,65 @@ namespace HelloWorld
             //var serial = Console.ReadLine();
             //Console.WriteLine(LetterLooper(serial));
 
-            //Console.WriteLine("Enter numbers.");
-            //var numbers = Console.ReadLine();
-            //string[] splitNumbers = numbers.Split(",");
-            //int[] convertedNumbers = Array.ConvertAll(splitNumbers, number => Int32.Parse(number));
-            //Console.WriteLine("Square or Multiply?");
-            //var response = Console.ReadLine();
-            //int answer;
-            //if (response == "Multiply")
-            //{
-            //    var multiplied = 1;
-            //    foreach (int number in convertedNumbers)
-            //    {
-            //        multiplied *= number;
-            //    }
-            //    answer = multiplied;
-            //    Console.WriteLine(answer);
-            //}
-            //else if (response == "Square")
-            //{
-            //    for (int i = 0; i < convertedNumbers.Length; i++)
-            //    {
+            Console.WriteLine("Enter operation.");
+            var operation = Console.ReadLine();
+            var firstTwo = operation.Substring(0, 2);
+            string numbers;
+            if (firstTwo == "^2")
+            {
+                var trimmed = operation.TrimStart('*', ' ', '^', '+', '/');
+                numbers = trimmed.Remove(0, 1);
+            }
+            else if (firstTwo == "av")
+            {
+                numbers = operation.Remove(0, 3);
+            }
+            else
+            {
+                numbers = operation.TrimStart('*', ' ', '^', '+', '/');
+            }
+            string[] splitNumbers = numbers.Split(",");
+            int[] convertedNumbers = Array.ConvertAll(splitNumbers, number => Int32.Parse(number));
 
-            //    }
-            //}
-            
-
+            switch (firstTwo)
+            {
+                case "* ":
+                    var multiplied = 1;
+                    foreach (int number in convertedNumbers)
+                    {
+                        multiplied *= number;
+                    }
+                    Console.WriteLine(multiplied);
+                    break;
+                case "^2":
+                    for (int i = 0; i < convertedNumbers.Length; i++)
+                    {
+                        convertedNumbers[i] *= convertedNumbers[i];
+                    }
+                    Console.WriteLine(string.Join(',', convertedNumbers));
+                    break;
+                case "+ ":
+                    var added = 0;
+                    foreach (int number in convertedNumbers)
+                    {
+                        added += number;
+                    }
+                    Console.WriteLine(added);
+                    break;
+                case "/ ":
+                    var divided = convertedNumbers[0] / convertedNumbers[1];
+                    Console.WriteLine(divided);
+                    break;
+                case "av":
+                    var sum = 0;
+                    for (int i = 0; i < convertedNumbers.Length; i++)
+                    {
+                        sum += convertedNumbers[i];
+                    }
+                    var average = sum / convertedNumbers.Length;
+                    Console.WriteLine(average);
+                    break;
+            }
         }
     }
 }
